@@ -8,6 +8,8 @@ function Movies() {
 
   let [hoverId , setHoverId] = useState(null);
 
+  let [pageNum , setPageNum] = useState(1);
+
   let {favs , setFavs} = useContext(AppContext);
 
   const showEmoji = (id) => {
@@ -33,7 +35,7 @@ function Movies() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/trending/all/week?api_key=${import.meta.env.VITE_API_KEY}&page=1`
+          `https://api.themoviedb.org/3/trending/all/week?api_key=${import.meta.env.VITE_API_KEY}&page=${pageNum}`
         );
         console.log(response.data.results);
         setMovies(response.data.results);
@@ -42,10 +44,11 @@ function Movies() {
       }
     };
     fetchData();
-  }, []);
+  }, [pageNum]);
 
   return (
-    <div className='flex flex-wrap justify-center items-center'>
+    <div>
+      <div className='flex flex-wrap justify-center items-center'>
       {(movies.length == 0) ? <div>...Loading</div> : movies.map((movie) => {
         return (
           <div key={movie.id} className='m-2 w-1/5 relative hover:scale-110 transition transform duration-300 rounded-lg'
@@ -61,14 +64,15 @@ function Movies() {
           </div>
         )
       })}
+      </div>
+
+      <div className='flex justify-center my-2'>
+        <button className='border-2 border-blue-300 p-1.5 rounded-l-full font-bold text-2xl' onClick={() => {if(pageNum > 1) setPageNum(pageNum-1)}}>previous</button>
+        <div className='border-2 border-blue-300 p-1.5 font-bold text-2xl'>{pageNum}</div>
+        <button className='border-2 border-blue-300 p-1.5 rounded-r-full font-bold text-2xl' onClick={() => setPageNum(pageNum+1)}>next</button>
+      </div>
     </div>
   );
 }
 
 export default Movies;
-
-
-/**
- * 
- * https://api.themoviedb.org/3/trending/all/week?api_key=${import.meta.env.VITE_API_KEY}&page=1
- */
