@@ -8,15 +8,23 @@ import FavoriatesPage from './components/FavoriatesPage'
 function App() {
   return (
     <BrowserRouter>
-      <NavBar></NavBar>
-      <Routes>
-        <Route path='/' element={<><Banner></Banner>
-                                 <Movies></Movies></>}>
-        </Route>
-        <Route path='/fav' element={<FavoriatesPage></FavoriatesPage>}></Route>
-      </Routes>
+      <NavBar />
+      <div className='mt-[80px]'> {/* Adjust this margin to match NavBar height */}
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                <Banner />
+                <Movies />
+              </>
+            }
+          ></Route>
+          <Route path='/fav' element={<FavoriatesPage />}></Route>
+        </Routes>
+      </div>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App
