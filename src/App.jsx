@@ -1,25 +1,24 @@
-import './App.css'
-import NavBar from './components/NavBar'
-import Banner from './components/Banner'
-import Movies from './components/Movies'
-import { BrowserRouter, Route, Routes } from 'react-router'
-import FavoriatesPage from './components/FavoriatesPage'
-import React, { useState , createContext } from 'react'
+import './App.css';
+import NavBar from './components/NavBar';
+import Banner from './components/Banner';
+import Movies from './components/Movies';
+import { BrowserRouter, Route, Routes } from 'react-router';
+import FavoriatesPage from './components/FavoriatesPage';
+import React, { useState, createContext } from 'react';
 
 export const AppContext = React.createContext();
 
 function App() {
-
-  let [favs , setFavs] = useState([]);
+  let [favs, setFavs] = useState([]);
 
   return (
-    <AppContext.Provider value={{favs , setFavs}}>
+    <AppContext.Provider value={{ favs, setFavs }}>
       <BrowserRouter>
-      <NavBar />
-      <div className='mt-[80px]'>
+        <NavBar />
+        <div className="mt-[80px]">
           <Routes>
             <Route
-              path='/'
+              path="/"
               element={
                 <>
                   <Banner />
@@ -27,7 +26,7 @@ function App() {
                 </>
               }
             ></Route>
-            <Route path='/fav' element={<FavoriatesPage />}></Route>
+            <Route path="/fav" element={<FavoriatesPage />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
@@ -35,4 +34,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
