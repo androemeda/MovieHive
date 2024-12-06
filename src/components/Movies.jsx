@@ -5,9 +5,7 @@ import { AppContext } from '../App';
 function Movies() {
 
   let [movies , setMovies] = useState([]);
-
   let [hoverId , setHoverId] = useState(null);
-
   let [pageNum , setPageNum] = useState(1);
 
   let {favs , setFavs} = useContext(AppContext);
@@ -20,16 +18,14 @@ function Movies() {
     setHoverId(null);
   }
 
-  const ToggleEmoji = (id) => {
-    if(!favs.includes(id)){
-      let arr = [...favs , id];
-      setFavs(arr);
+  const ToggleEmoji = (movie) => {
+    const isFavorite = favs.some((fav) => fav.id === movie.id);
+    if (!isFavorite) {
+      setFavs([...favs, movie]);
+    } else {
+      setFavs(favs.filter((fav) => fav.id !== movie.id));
     }
-    else{
-      let arr = favs.filter((fav) => {return fav !== id});
-      setFavs(arr);
-    }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,8 +55,8 @@ function Movies() {
             <div className='rounded-lg absolute flex bottom-0 bg-gray-400 w-full opacity-70 justify-center items-center h-[10%]'>{movie.title || movie.name}</div>
             <button className='absolute aspect-square h-[10%] bg-black top-2 right-3 rounded-lg justify-center items-center text-xl'
               style={{display : (movie.id == hoverId) ? "flex" : "none"}}
-              onClick={() => ToggleEmoji(movie.id)}
-            >{(favs.includes(movie.id) ? "❌" : "😍")}</button>
+              onClick={() => ToggleEmoji(movie)}
+            >{(favs.includes(movie) ? "❌" : "😍")}</button>
           </div>
         )
       })}
