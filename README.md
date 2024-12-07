@@ -1,8 +1,23 @@
-# React + Vite
+# MovieHive: Explore Trending Movies
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**MovieHive** is a movie exploration web app. The app uses data fetched from The Movie Database (TMDb) API to display movie details and provides features like pagination, local storage, and responsiveness for a smooth user experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: The app is built using React for a dynamic user interface.
+- **Pagination**: Navigate through movie lists using pagination.
+- **Searching**: Search for movies by title.
+- **Sorting**: Sort movies based on popularity, release date, and rating.
+- **Filtering**: Filter movies by genre or other criteria.
+- **Routing**: React Router is used for navigation between different pages.
+- **Local Storage**: Saves user preferences and data such as favorite movies.
+- **Responsiveness**: Fully responsive design to support all screen sizes.
+
+## Technologies Used
+
+- **React**: For building the UI and managing state.
+- **TMDb API**: Used to fetch movie data and display trending movies.
+- **React Router**: For page navigation.
+- **CSS/SCSS**: For styling the app with a clean and modern look.
+
+**Demo Link** : https://drive.google.com/file/d/1eWyX2hgD8RZ0aGzTmF2bZc2DzhmHrKfZ/view?usp=sharing
