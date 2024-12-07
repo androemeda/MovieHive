@@ -17,13 +17,21 @@ function Movies() {
     setHoverId(null);
   };
 
+  useEffect(() => {
+    const savedFavs = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavs(savedFavs);
+  }, []);
+
   const ToggleEmoji = (movie) => {
     const isFavorite = favs.some((fav) => fav.id === movie.id);
+    let updatedFavs;
     if (!isFavorite) {
-      setFavs([...favs, movie]);
+      updatedFavs = [...favs, movie];
     } else {
-      setFavs(favs.filter((fav) => fav.id !== movie.id));
+      updatedFavs = favs.filter((fav) => fav.id !== movie.id);
     }
+    setFavs(updatedFavs);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavs)); // Save to localStorage
   };
 
   useEffect(() => {
@@ -53,7 +61,7 @@ function Movies() {
             return (
               <div
                 key={movie.id}
-                className="m-2 w-1/5 relative hover:scale-110 transition transform duration-300 rounded-lg"
+                className="m-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/5 relative hover:scale-110 transition transform duration-300 rounded-lg"
                 onMouseEnter={() => showEmoji(movie.id)}
                 onMouseLeave={hideEmoji}
               >
@@ -71,7 +79,7 @@ function Movies() {
                   style={{ display: movie.id == hoverId ? 'flex' : 'none' }}
                   onClick={() => ToggleEmoji(movie)}
                 >
-                  {favs.includes(movie) ? '❌' : '😍'}
+                  {favs.some((fav) => fav.id === movie.id) ? '❌' : '😍'}
                 </button>
               </div>
             );

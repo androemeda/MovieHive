@@ -4,12 +4,21 @@ import Banner from './components/Banner';
 import Movies from './components/Movies';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import FavoriatesPage from './components/FavoriatesPage';
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext , useEffect } from 'react';
 
 export const AppContext = React.createContext();
 
 function App() {
   let [favs, setFavs] = useState([]);
+
+  useEffect(() => {
+    const savedFavs = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavs(savedFavs);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favs));
+  }, [favs]);
 
   return (
     <AppContext.Provider value={{ favs, setFavs }}>
